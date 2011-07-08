@@ -6,8 +6,8 @@
  * @todo Conversie naar lowercase e.d. configureerbaar maken
  * @package Filters
  */
-
-class FilenameFilter extends Object implements Filter{
+namespace SledgeHammer;
+class FilenameFilter extends Object implements Filter {
 	
 	public
 		$toLowerCase,

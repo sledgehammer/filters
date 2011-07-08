@@ -4,7 +4,7 @@
  *
  * @package Filters
  */
-
+namespace SledgeHammer;
 class FunctionFilter extends Object implements Filter {
 
 	private
@@ -20,7 +20,7 @@ class FunctionFilter extends Object implements Filter {
 	 */
 	function __construct($callback, $default_parameters = array(), $parameter_index = 0) {
 		if (!is_callable($callback)) {
-			throw new Exception('$callback isn\'t callable');
+			throw new \Exception('$callback isn\'t callable');
 		}
 		$this->callback = $callback;
 		$this->default_parameters = $default_parameters;

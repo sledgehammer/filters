@@ -4,8 +4,8 @@
  * 
  * @package Filters
  */
-
-class IteratorFilter extends Object implements Iterator {
+namespace SledgeHammer;
+class IteratorFilter extends Object implements \Iterator {
 
 	private 
 		$Iterator,
@@ -18,11 +18,11 @@ class IteratorFilter extends Object implements Iterator {
 	 * @param Filter|array $Filters A Filter or a Filter per column: array('column1' => new FunctionFilter('md5'))
 	 */
 	function __construct($Iterator, $Filters) {
-		if ($Iterator instanceof Iterator) {
+		if ($Iterator instanceof \Iterator) {
 			$this->Iterator = $Iterator;
 		} else {
 			$type = (gettype($Iterator) == 'object') ? get_class($Iterator) : gettype($Iterator);
-			throw new Exception('$Iterator('.$type.') doesn\'t implement Iterator');
+			throw new \Exception('$Iterator('.$type.') doesn\'t implement Iterator');
 		}
 		$this->Filters = $Filters;
 		$this->filter_per_column = is_array($this->Filters);

@@ -4,7 +4,7 @@
  *
  * @package Filters
  */
-
+namespace SledgeHammer;
 interface Filter {
 
 	/**
