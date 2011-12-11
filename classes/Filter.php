@@ -1,6 +1,6 @@
 <?php
 /**
- * De interface definitie van voor Filter objecten
+ * The filter interface
  *
  * @package Filters
  */
