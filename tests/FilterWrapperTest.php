@@ -5,7 +5,7 @@
  */
 namespace SledgeHammer;
 
-class FilterWrapperTests extends TestCase {
+class FilterWrapperTest extends TestCase {
 
 	function test_() {
 		restore_error_handler();
@@ -14,7 +14,7 @@ class FilterWrapperTests extends TestCase {
 			'js' => '<script>alert("hacked");</script>',
 		);
 		$filtered = new FilterWrapper($array, array('filter' => new HtmlFilter()));
-		$this->assertEqual($filtered['vera'], 'alo&euml;');
+		$this->assertEquals($filtered['vera'], 'alo&euml;');
 
 	}
 
