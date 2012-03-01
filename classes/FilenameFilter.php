@@ -16,7 +16,7 @@ class FilenameFilter extends Object implements Filter {
 	function __construct($toLowerCase = true, $charset = null) {
 		$this->toLowerCase = $toLowerCase;
 		if ($charset === null) {
-			$this->charset = $GLOBALS['charset'];
+			$this->charset = Framework::$charset;
 		} else {
 			$this->charset = $charset;
 		}

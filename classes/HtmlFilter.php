@@ -22,7 +22,7 @@ class HtmlFilter extends Object implements Filter {
 		switch (gettype($text)) {
 
 			case 'string':
-				return htmlentities($text, ENT_COMPAT, $GLOBALS['charset']);
+				return htmlentities($text, ENT_COMPAT, Framework::$charset);
 
 			case 'NULL':
 			case 'boolean':
@@ -32,7 +32,7 @@ class HtmlFilter extends Object implements Filter {
 
 			case 'object':
 				if (method_exists($text, '__toString')) { // Kan het object omgezet worden naar een string?
-					return htmlentities($text, ENT_COMPAT, $GLOBALS['charset']); // Omzet naar string en deze string escapen.
+					return htmlentities($text, ENT_COMPAT, Framework::$charset); // Omzet naar string en deze string escapen.
 				}
 				notice('Objects without __toString() implementation are not allowed');
 				return null;
