@@ -1,8 +1,9 @@
 <?php
 /**
+ * Global functions
  * @package Filters
  */
-namespace SledgeHammer;
+namespace Sledgehammer;
 /**
  * Shorthand for using use a Filter object.
  *   $Filter = new FilterClass;

@@ -4,7 +4,7 @@
  *
  * @package Filters
  */
-namespace SledgeHammer;
+namespace Sledgehammer;
 class FunctionFilter extends Object implements Filter {
 
 	private

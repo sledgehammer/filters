@@ -4,7 +4,7 @@
  *
  * @package Filters
  */
-namespace SledgeHammer;
+namespace Sledgehammer;
 
 class FilterIterator extends Object implements \Iterator {
 

@@ -7,7 +7,7 @@
  *
  * @package Filter
  */
-namespace SledgeHammer;
+namespace Sledgehammer;
 
 class HtmlFilter extends Object implements Filter {
 

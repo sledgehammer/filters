@@ -1,10 +1,12 @@
 <?php
-
 /**
- * FilterObject
- *
+ * FilterWrapper
+ * @package Filters
  */
-namespace SledgeHammer;
+namespace Sledgehammer;
+/**
+ * Wraps all properties/elements with a filter.
+ */
 class FilterWrapper extends Wrapper {
 
 	/**
@@ -20,8 +22,6 @@ class FilterWrapper extends Wrapper {
 			throw new \Exception('option "filter" is required for a FilterObject');
 		}
 		if (method_exists($this->_filter, 'filter') === false) {
-					dump($this);
-
 			throw new \Exception('The given "filter" is not compatible with the Filter interface');
 		}
 		if ($this->_filterIn === null) {

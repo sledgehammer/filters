@@ -3,7 +3,7 @@
  * FilterObjectTests
  *
  */
-namespace SledgeHammer;
+namespace Sledgehammer;
 
 class FilterWrapperTest extends TestCase {
 

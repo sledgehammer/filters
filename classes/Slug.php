@@ -1,34 +1,32 @@
 <?php
 /**
- * Veranderd een willekeurige string naar een nette bestandsnaam 
- * Corrigeerd karakers zoals "o-met puntjes"naar een "o"
- *
- * @todo Conversie naar lowercase e.d. configureerbaar maken
+ * Slug
  * @package Filters
  */
-namespace SledgeHammer;
-class FilenameFilter extends Object implements Filter {
-	
-	public
-		$toLowerCase,
-		$charset;
-		
-	function __construct($toLowerCase = true, $charset = null) {
-		$this->toLowerCase = $toLowerCase;
-		if ($charset === null) {
-			$this->charset = Framework::$charset;
-		} else {
-			$this->charset = $charset;
+namespace Sledgehammer;
+/**
+ * Veranderd een willekeurige string naar een nette bestandsnaam
+ * Corrigeerd karakers zoals "o-met puntjes"naar een "o"
+ */
+class Slug extends Object implements Filter {
+
+	private $lowercase = true;
+	private $charset = null;
+
+	function __construct($options) {
+		foreach ($options as $property => $value) {
+			$this->$property = $value;
 		}
+
 	}
 
 	public function filter($value)	{
 		$value = self::convertSpecialChars($value, $this->charset);
-		
+
 		$value = preg_replace('/[^a-z0-9\.]/i', '-', $value);
 		$value = preg_replace('/[\-]{2,}/', '-', $value);
 		$value = preg_replace('/[\.]{2,}/', '.', $value);
-		if ($this->toLowerCase) {
+		if ($this->lowercase) {
 			$value = strtolower($value);
 		}
 		$value = trim($value,'-');
@@ -42,7 +40,10 @@ class FilenameFilter extends Object implements Filter {
 	 *
 	 * @return 7bit representation
 	 */
-	static function convertSpecialChars($text, $charset) {
+	static function convertSpecialChars($text, $charset = null) {
+		if ($charset === null) {
+			$charset = Framework::$charset;
+		}
     	//$text = mb_convert_encoding($text,'HTML-ENTITIES',$charset);
     	$text = htmlentities($text, ENT_COMPAT, $charset).'"';
     	$text = preg_replace(
@@ -52,8 +53,8 @@ class FilenameFilter extends Object implements Filter {
 			$text
 		);
     	return $text;
-	}  
-	
+	}
+
 	/**
 	 * @author Tim Schipper
 	 */
