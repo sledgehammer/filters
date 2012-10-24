@@ -1,7 +1,6 @@
 <?php
 /**
- * FilterObjectTests
- *
+ * FilterWrapperTest
  */
 namespace Sledgehammer;
 
@@ -13,7 +12,7 @@ class FilterWrapperTest extends TestCase {
 			'vera' => 'aloë',
 			'js' => '<script>alert("hacked");</script>',
 		);
-		$filtered = new FilterWrapper($array, array('filter' => new HtmlFilter()));
+		$filtered = new FilterWrapper($array, array('filter' => new HtmlentitiesFilter()));
 		$this->assertEquals($filtered['vera'], 'alo&euml;');
 
 	}

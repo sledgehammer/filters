@@ -1,47 +1,51 @@
 <?php
 /**
  * FilterWrapper
- * @package Filters
  */
 namespace Sledgehammer;
 /**
  * Wraps all properties/elements with a filter.
+ *
+ * @package Filters
  */
 class FilterWrapper extends Wrapper {
 
 	/**
-	 * @var Filter
+	 * @var callable
 	 */
 	protected $_filter;
-	protected $_filterIn;
-	protected $_filterOut;
+	/**
+	 *
+	 * @var callable
+	 */
+	protected $_inputFilter;
+	/**
+	 *
+	 * @var callable
+	 */
+	protected $_outputFilter;
 
 	function __construct($data, $options = array()) {
 		parent::__construct($data, $options);
 		if ($this->_filter === null) {
-			throw new \Exception('option "filter" is required for a FilterObject');
+			throw new \Exception('option "filter" is required for a FilterWrapper');
 		}
-		if (method_exists($this->_filter, 'filter') === false) {
-			throw new \Exception('The given "filter" is not compatible with the Filter interface');
+		if ($this->_inputFilter === null) {
+			$this->_inputFilter = $this->_filter;
 		}
-		if ($this->_filterIn === null) {
-			$this->_filterIn = $this->_filter;
-		}
-		if ($this->_filterOut === null) {
-			$this->_filterOut = $this->_filter;
+		if ($this->_outputFilter === null) {
+			$this->_outputFilter = $this->_filter;
 		}
 	}
 
 	protected function out($value, $element, $context) {
 		$value = parent::in($value, $element, $context);
-		return $this->_filterOut->filter($value);
+		return filter($value, $this->_outputFilter);
 	}
 
 	protected function in($value, $element, $context) {
 		$value = parent::in($value, $element, $context);
-		dump($this);
-		dump($element);
-		return $this->_filterIn->filter($value);
+		return filter($value, $this->_inputFilter);
 	}
 }
 

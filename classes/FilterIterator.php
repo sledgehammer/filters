@@ -1,11 +1,13 @@
 <?php
 /**
- * Extend an Iterator with 1 or more Filter objects
+ * FilterIterator
+ */
+namespace Sledgehammer;
+/**
+ * Extend an Iterator with 1 or more filters
  *
  * @package Filters
  */
-namespace Sledgehammer;
-
 class FilterIterator extends Object implements \Iterator {
 
 	/**
@@ -14,7 +16,7 @@ class FilterIterator extends Object implements \Iterator {
 	private $iterator;
 
 	/**
-	 * @var Filter|array
+	 * @var array|callable
 	 */
 	private $filters;
 
@@ -41,12 +43,12 @@ class FilterIterator extends Object implements \Iterator {
 	function current() {
 		$values = $this->iterator->current();
 		if ($this->perColumn) {
-			foreach ($this->filters as $key => $Filter) {
-				$values[$key] = $Filter->filter($values[$key]);
+			foreach ($this->filters as $key => $filter) {
+				$values[$key] = filter($values[$key], $filter);
 			}
 			return $values;
 		} else {
-			return $this->filters->filter($values);
+			return filter($values, $this->filters);
 		}
 	}
 

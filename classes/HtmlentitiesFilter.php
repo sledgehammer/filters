@@ -1,24 +1,23 @@
 <?php
 /**
- * HtmlFilter converts raw text into htmlencoded text.
- * Protects against XSS attacks
- *
- * @todo Implement a tag whitelist.
- *
- * @package Filter
+ * HtmlentitiesFilter
  */
 namespace Sledgehammer;
-
-class HtmlFilter extends Object implements Filter {
+/**
+ * Converts raw text into htmlencoded text.
+ * Protects against XSS attacks.
+ *
+ * @package Filters
+ */
+class HtmlentitiesFilter extends Object {
 
 	/**
 	 * Deze filter kijkt naar het datatype en geeft een html-safe waarde terug.
-	 * In tegenstelling tot de toHtml filter worden booleans e.d. niet omgezet naar een string.
 	 *
 	 * @param mixed $text
 	 * @return mixed xss-safe value
 	 */
-	function filter($text) {
+	function __invoke($text) {
 		switch (gettype($text)) {
 
 			case 'string':
